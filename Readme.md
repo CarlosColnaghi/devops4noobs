@@ -47,7 +47,7 @@
     $ git status
 
 ### Adicionar os arquivos para o estado de versionamento
-    $ git add {nome do arquivo}
+    $ git add nome_do_arquivo
 
 ### Criar um commit
     $ git commit -m "mensagem"
@@ -87,3 +87,45 @@
 
 ### Resetar os arquivos para um commit anterior, mas os arquivos retornam para o estado unmodified
     $ git reset --hard identificador_do_commit_anterior
+
+### Sincronizar um repositório local com o repositório no Github
+
+    $ git remote add origin endereco_do_repositorio
+    $ git push -u origin main
+
+### Enviar os commits de um repositório local para o repositório no Gihub
+
+    $ git push origin main
+
+
+## CLONE X FORK
+
+O clone é usado quando o dono do repositório é o próprio usuário, enquanto que o fork é o contrário, e portanto, deve ser usado quando o usuário não é o dono de repositório.
+
+## BRANCHES
+
+São ponteiros associados aos commits que permitem criar "cópias" do repositório para o desenvolvimento paralelo sobre o mesmo projeto
+
+### Comandos
+
+### Clonar um repositório próprio
+    $ git clone endereco_do_repositorio
+
+
+### Criar uma nova branch
+    $ git checkout -b nome_da_branch
+
+### Listar todas as branchs
+    $ git branch
+
+### Deletar uma branch
+    $ git branch -D nome_da_branch
+
+### Mudar para uma outra branch
+    $ git checkout nome_da_branch
+
+## MERGE X REBASE
+Tanto o merge quanto rebase são métodos para unir os commits das branchs. O merge é uma operação não destrutiva, no entanto, depende de um novo commit que aponta para os commits de outras branchs. Em contrapartida, o rebase move os commits de uma branch para "frente" da sequência de commits de uma outra branch.
+
+## Comandos
+
