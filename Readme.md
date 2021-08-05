@@ -23,7 +23,7 @@
 - <b>modified:</b> o arquivo mudou em relação a versão anterior, mas não esta preparado para entrar na próxima versão 
 - <b>staged:</b> o arquivo esta preparado para um commit (versão do repositório ou snapshot dos arquivos)
 
-## Comandos
+## Principais Comandos
 
 ### Configurações de variáveis de usuários
 
@@ -128,4 +128,60 @@ São ponteiros associados aos commits que permitem criar "cópias" do repositór
 Tanto o merge quanto rebase são métodos para unir os commits das branchs. O merge é uma operação não destrutiva, no entanto, depende de um novo commit que aponta para os commits de outras branchs. Em contrapartida, o rebase move os commits de uma branch para "frente" da sequência de commits de uma outra branch.
 
 ## Comandos
+
+### Unir branchs com merge
+
+    $ git merge nome_da_branch
+
+### Unir banchs com rebase
+
+    $ git rebase nome_da_branch
+
+## GITIGNORE
+É um arquivo que determina os arquivos que serão ignorados no processo de versionamento
+
+## STASH
+É um comando para armazenar temporariamente as mudanças de arquivos que estão no estado modified
+
+### Armazenar as mudanças na lista
+    $ git stash
+
+### Recuperar e aplicar as mudanças lista
+
+    $ git stash apply
+
+### Limpar a lista de mudanças
+
+    $ git stash clear
+
+### Listar as mudanças da lista
+
+    $ git stash list
+
+## TAGS
+São marcações que representam uma versão da release do projeto
+
+## Comandos
+
+### Criar uma tag
+    $ git tag -a versao -m "mensagem"
+
+### Listar as tags
+    $ git tag
+
+### Enviar as tags para os repositórios remotos
+    
+    $ git push origin master --tags
+
+## REVERT
+
+É uma maneira de criar um novo commit para voltar para uma versão anterior
+
+## Comandos
+
+### Reverter um commit
+    $ git revert endereco_do_commit
+
+
+# AWS
 
