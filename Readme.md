@@ -185,3 +185,101 @@ São marcações que representam uma versão da release do projeto
 
 # AWS
 
+## Serviços
+
+- EC2
+- VPC
+- Route 53
+- S3
+- Cloud Watch
+- IAM
+
+## AWS CLI
+1.  Criar um novo grupo de administradores
+    - Group Name: nome_do_grupo
+    - Attach Policy: AdministratorAccess
+
+2. Adicionar um novo usuario
+    - User name: nome_do_usuario
+    - Acess type: [x] Programatic access
+    - Add user to group: [x] nome_do_grupo
+
+### Comandos
+Iniciar o processo de configuração do AWS CLI
+
+    $ aws configure
+
+### Configuração
+
+    AWS Access Key ID: *******
+    AWS Secret Access Key: *******
+    Default region name: us-east-1
+    Default output format: json
+
+## EC2 (Elastic Compute Cloud)
+
+### Conteúdos
+- Instâncias (virtualização de máquinas e servidores)
+- Balanceamento de Carga (Load Balance)
+- Escalonamento (AWS Auto Scaling)
+- Armazenamento
+- Segurança (keys)
+
+### Regiões, Zonas de Disponibilidade e Zonas Locais
+
+Cada região é composta por pelo menos três data centers que representam as zonas de disponibilidades (AZ). Já as zonas locais se conectam a uma ou mais zonas de disponibilidade para diminuir a latência
+
+- Direct Connect: conexão entre uma zona local e o cliente
+- Backbone: conexão entre uma zona local e uma zona de disponibilidaade
+
+### Tipos de instâncias EC2
+
+- Uso geral
+- Otimizadas para CPU
+- Otimizadas para RAM
+- GPU
+- Otimizadas para Armazenamento
+
+### Criar instâncias EC2
+
+1. Launch Instance: Inicia o processo de criação das instâncias
+
+2. Choose an Amazon Machine Image (AMI): Determina a imagem do sistema operacional da instância
+
+3. Choose an Instance Type: Determina o tipo de instância (principalmente com relação ao hardware)
+
+4. Configure Security Group: Permite criar um novo grupo com os padrões para acessar a instância
+
+5. Create a new key pair: Cria um par de chaves para acessar a instância via SSH
+
+### Configure Instance Details
+- Number of instances: determinquantidade de instâncias
+- Shutdown behavior: comportamento executado no momento que a máquina é desligada
+    - Terminate: impede que a máquina seja inicializada novamente depois de desligada (em outras palavras, a instância é terminada)
+    - Stop: permite que a máquia seja inicializada novamente depois de desligada
+- Termination protection: protege contra o desligamento "acidental" de uma máquina
+
+### Mudar a permissão de uma chave SSH 
+É importante que apenas o dono tenha a permissão de realizar a leitura da chave
+
+    $ chmod 400 caminho_da_chave
+
+### Conectar com uma instância EC2
+
+    $ ssh -i caminho_da_chave nome_do_usuario@endereco_da_instancia
+
+### Comandos
+
+Listar todas as instâncias 
+    
+    $ aws ec2 describe-instances
+
+Remover uma instância
+
+    $ aws ec2 terminate-instances --instance-ids "id-xyz"
+
+Exemplo de parâmetros para criar uma instância 
+
+    $ aws ec2 run-instances --image-id "ami-0323c3dd2da7fb37d" --count 1 --instance-type "t2.micro" --key-name "MinhaChaveSSH" --security-group-ids "sg-0529062a5d07f7eab" --subnet-id "subnet-1deb2d3c
+
+
