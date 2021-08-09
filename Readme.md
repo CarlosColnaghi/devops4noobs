@@ -282,4 +282,27 @@ Exemplo de parâmetros para criar uma instância
 
     $ aws ec2 run-instances --image-id "ami-0323c3dd2da7fb37d" --count 1 --instance-type "t2.micro" --key-name "MinhaChaveSSH" --security-group-ids "sg-0529062a5d07f7eab" --subnet-id "subnet-1deb2d3c
 
+### AMI
+- Uma AMI é uma imagem de uma máquina e uma instância sempre está associada à uma AMI
+- Por padrão, uma AMI é privada e reservada para a sua região de origem
+- A AMI é armazenada pelo serviço de Bucket
+- É possível criar uma instância com base em AMI e depois de customizar essa instância, ainda é possivel criar uma nova AMI com base na instância customizada
 
+- Tipos de AMI
+    - Região
+    - Sistema Operacional
+    - Arquitetura
+    - Permissões de execução (pública, explícita e implícita)
+    - Armazenamento
+
+### Customização em tempo de execução de uma AMI
+
+1. Advances Details
+    - User data: [x] As text
+    
+            $ #!/bin/bash
+
+            $ yum update -y
+            $ yum install httpd -y
+            $ systemctl start httpd
+            $ systemctl enable 
