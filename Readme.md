@@ -295,14 +295,46 @@ Exemplo de parâmetros para criar uma instância
     - Permissões de execução (pública, explícita e implícita)
     - Armazenamento
 
-### Customização em tempo de execução de uma AMI
+### Customizar em tempo de execução de uma AMI
+1. Instances
 
-1. Advances Details
-    - User data: [x] As text
-    
-            $ #!/bin/bash
+2. Launch Intance
 
-            $ yum update -y
-            $ yum install httpd -y
-            $ systemctl start httpd
-            $ systemctl enable 
+3. Configure Instance Details
+    - Advanced Details
+        - Em User Data é possível inserir um script que será exacutado durante o deploy da instância
+        - User data: [x] As text
+            
+                $ #!/bin/bash
+
+                $ yum update -y
+                $ yum install httpd -y
+                $ systemctl start httpd
+                $ systemctl enable 
+
+### Liberar portas dos grupos de segurança
+1. Inbound rules
+2. Edit inbound rules
+3. Add rule
+5. Save rule
+
+### Indenficar se um serviço esta rodando no EC2
+
+    $ rpm -qa | grep httpd
+    $ systemctl status httpd
+
+### Criar uma AMI
+1. Actions 
+2. Image
+3. Create Image
+    Image name: nome_da_imagem
+
+### Criar uma instância a partir de uma AMI
+1. [x] AMI
+2. Launch
+
+### Comandos
+
+#### Criar uma AMI
+
+    $ aws ec2 create-image --instance-id endereco_da_ami --name "nome_da_imagem"  --description "descricao_da_ami" --no-reboot
