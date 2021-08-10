@@ -201,8 +201,8 @@ São marcações que representam uma versão da release do projeto
 
 2. Adicionar um novo usuario
     - User name: nome_do_usuario
-    - Acess type: [x] Programatic access
-    - Add user to group: [x] nome_do_grupo
+    - Acess type: Selecionar "Programatic access"
+    - Add user to group: Selecionar "nome_do_grupo"
 
 ### Comandos
 Iniciar o processo de configuração do AWS CLI
@@ -303,7 +303,7 @@ Exemplo de parâmetros para criar uma instância
 3. Configure Instance Details
     - Advanced Details
         - Em User Data é possível inserir um script que será exacutado durante o deploy da instância
-        - User data: [x] As text
+        - User data: Selecionar "As text"
             
                 $ #!/bin/bash
 
@@ -327,10 +327,10 @@ Exemplo de parâmetros para criar uma instância
 1. Actions 
 2. Image
 3. Create Image
-    Image name: nome_da_imagem
+    - Image name: nome_da_imagem
 
 ### Criar uma instância a partir de uma AMI
-1. [x] AMI
+1. Selecionar a AMI
 2. Launch
 
 ### Comandos
@@ -338,3 +338,30 @@ Exemplo de parâmetros para criar uma instância
 #### Criar uma AMI
 
     $ aws ec2 create-image --instance-id endereco_da_ami --name "nome_da_imagem"  --description "descricao_da_ami" --no-reboot
+
+### Compartilhamento de uma AMI
+Toda AMI está associada a uma SNAPSHOT que 
+- Mudar as permissões da AMI
+    1. EC2
+    2. Instances
+    3. Actions
+    4. Modify Image Permissions
+
+- Compartilhar a AMI de uma região para outra
+    1. Selecionar a AMI
+    2. Actions
+    3. Copy AMI
+        - Destination region
+
+### Remover uma AMI
+1. Selecionar a AMI
+2. Actions
+3. Deregister
+
+### Remover o SNAPSHOT da API
+1. Selecionar a SNAPSHOT
+2. Actions
+3. Delete
+
+## Tags
+As Tags são usadas para categorizar os recursos por meio da estrutura chave:valor
