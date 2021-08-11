@@ -365,3 +365,21 @@ Toda AMI está associada a uma SNAPSHOT que
 
 ## Tags
 As Tags são usadas para categorizar os recursos por meio da estrutura chave:valor
+
+### Criar ou editar Tags
+1. Tags
+2. Add/Edit Tags
+3. Create Tag
+    - Key
+    - Value
+
+### Elastic Block Store
+- É um serviço de armazenamento para usar com o EC2. Em outras palavras é um disco virtual de uma instância EC2
+- Tanto a EC2, quanto a sua EBS, precisam estar na mesmo zona de disponiblidade
+- O volume EBS é replicado para todas as zonas de disponibilidade de uma região
+- O EBS é separado da instância EC2, e por isso se uma instância pode ser removida sem perder a EBS
+- Garante disponibilidade de dados, persistência de dados, criptofrafia de dados e snapshots
+
+### SSD x HDD
+- Volume baseadado em SSD: Otimizado para grandes transações de dados
+- Volume basedo em HDD: Otimizado para armazenar grandes volumes de dados
