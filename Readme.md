@@ -373,7 +373,7 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
     - Key
     - Value
 
-### Elastic Block Store
+### EBS (Elastic Block Store)
 - É um serviço de armazenamento para usar com o EC2. Em outras palavras é um disco virtual de uma instância EC2
 - Tanto a EC2, quanto a sua EBS, precisam estar na mesmo zona de disponiblidade
 - O volume EBS é replicado para todas as zonas de disponibilidade de uma região
@@ -383,3 +383,13 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
 ### SSD x HDD
 - Volume baseadado em SSD: Otimizado para grandes transações de dados
 - Volume basedo em HDD: Otimizado para armazenar grandes volumes de dados
+
+### Criando um volume EBS
+1. Criar uma instância
+    - Add Storage
+        1. Add New Volume
+        2. Volume Type
+        1. Size
+        2. Volume Type
+        OBS: Quando o IOPS precisa ser MAIOR QUE 16,000 é recomendado o Provisioned IOPS SSD
+        3. Delete on Termination
