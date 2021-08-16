@@ -386,7 +386,7 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
 
 ### Criando um volume EBS
 1. Criar uma instância
-    - Add Storage
+    1. Add Storage
         1. Add New Volume
         2. Volume Type
         1. Size
@@ -395,7 +395,8 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
         3. Delete on Termination
 
 2. Criar um volume
-    - Create Volume
+    1. Volumes
+    2. Create Volume
         1. Volume Type
         2. Size
         3. Availabity Zone
@@ -440,3 +441,11 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
 ### Anexar um volume via terminal
 
     $ aws ec2 attach-volume --volume-id vol-0ad91b69b44c62007 --instance-id i-001c3531c5a4dc46b --device /dev/sdp
+
+### Remover um volume
+1. Volumes
+2. Selecionar o volume
+3. Actions
+4. Detach volumes
+5. Actions
+6. Delete volumes
