@@ -393,3 +393,37 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
         2. Volume Type
         OBS: Quando o IOPS precisa ser MAIOR QUE 16,000 é recomendado o Provisioned IOPS SSD
         3. Delete on Termination
+
+2. Criar um volume
+    - Create Volume
+        1. Volume Type
+        2. Size
+        3. Availabity Zone
+        4. Add Tag
+            1. Key
+            2. Value
+        5. Create Volume
+
+### Anexando um volume EBS a uma instancia EC2
+1. Conectar com a maquina via SSH
+
+        $ ssh -i MinhaChaveSSH.pem ec2-user@54.152.77.83
+
+2. Mudar o usuario no root
+
+        $ sudo su -
+
+3. Listar todos os dispositivos de armazenamento
+
+        $ fdisk -l
+
+4. Criar um volume
+    - Quando o state de um volume está como "avalaible", quer dizer que ele está disponível e preparado para ser anexado
+
+5. Selecionar o volume
+
+6. Actions
+
+7. Attach Volume
+    - Instance
+    - Devide
