@@ -427,3 +427,16 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
 7. Attach Volume
     - Instance
     - Devide
+
+
+### Buscar comandos associados a um determinado termo
+
+    $ aws ec2 help | grep {termo}
+
+### Criar um volume via terminal
+
+    $ aws ec2 create-volume --volume-type gp2 --size 5 --availability-zone us-east-1b
+
+### Anexar um volume via terminal
+
+    $ aws ec2 attach-volume --volume-id vol-0ad91b69b44c62007 --instance-id i-001c3531c5a4dc46b --device /dev/sdp
