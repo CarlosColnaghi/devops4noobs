@@ -370,8 +370,8 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
 1. Tags
 2. Add/Edit Tags
 3. Create Tag
-    - Key
-    - Value
+    1. Key
+    2. Value
 
 ### EBS (Elastic Block Store)
 - É um serviço de armazenamento para usar com o EC2. Em outras palavras é um disco virtual de uma instância EC2
@@ -449,3 +449,23 @@ As Tags são usadas para categorizar os recursos por meio da estrutura chave:val
 4. Detach volumes
 5. Actions
 6. Delete volumes
+
+## Snapshots
+- É uma "foto" do estado de um volume e por isso, geralmente é um recurso usado para realizar um backup dos dados dos volumes
+- Os backups sào incrementais, ou seja, é copiado apenas aquilo que mudou em relação ao snapshot mais recente
+
+### Criar um snapshot
+1. Snaphots
+2. Create Snapshot
+    1. Voulume ou Intance
+    2. ID
+
+1. Volume
+2. Selecionar o volume
+3. Actions
+4. Create Snapshot
+    1. Description
+    2. Key
+    3. Value
+
+### Restaurar um snapshot
