@@ -504,6 +504,25 @@ Em sistemas operacionais Linus, náo é possível montar volumes com os mesmos U
 
     $ mount /dev/xdo1 /mnt
 
-Mudar o UUID
+Mudar o UUID de um volume
 
     $ xfs_admin -U $(uuidgen) /dev/xdo1
+
+
+### Lifecycle Manager
+Recurso que permiter criar uma política para gerenciamento automático de snapshots
+
+1. Volume
+2. Tags
+3. Add/Edit Tags
+     
+     1. Key
+     2. Value
+4. Lifecycle Policy
+    
+    1. Description
+    2. Select resouce type
+    3. Target with these tags
+    4. Lifecycle Policy Tags
+    5. Policy Schedule
+    6. Selecionar Copy Tafs from volume
