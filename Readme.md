@@ -514,15 +514,77 @@ Recurso que permiter criar uma política para gerenciamento automático de snaps
 
 1. Volume
 2. Tags
-3. Add/Edit Tags
-     
+3. Add/Edit Tags    
      1. Key
      2. Value
 4. Lifecycle Policy
-    
     1. Description
     2. Select resouce type
     3. Target with these tags
     4. Lifecycle Policy Tags
     5. Policy Schedule
-    6. Selecionar Copy Tafs from volume
+    6. Selecionar Copy Tags from volume
+    7. Create Policy
+
+### Security Groups
+- É um firewall que controla o tráfego de entrada e saída de dados de uma instância 
+- Todas as regras são permissivas, ou seja, elas estão desativadas e precisam ser ativadas, quando são necessárias
+- Por padrão, os Security Groups são stateful permitem o tráfego de saída 
+- É importante ser muito restritivo ao criar uma regra
+- Componentes das regras
+    - Protocolo: TCP, UDP, ICMP
+    - Intervalo de portas: 22 (SSH) ou 2000-3000
+    - Tipo de código do ICMP: echo-reply ou echo-request
+    - Origem ou destino 172.29.0.3/32 ou 172.29.0.0/24
+
+### Criar um Security Group
+1. Criar uma nova instância EC2
+    1. Na etapa de Configure Security Group
+        1. Selecionar Create a new security group
+        2. Remover a regra padrão de acesso à SSH 
+        3. Clicar no botão de Review
+        4. Clicar no botão de Launch
+        5. Clicar no botão Launch Instances para iniciar as intancias
+2. No menu Security Groups
+    1. Selecionar um Security group ID
+    - Inbound rules: regras de entrada e interna
+    - Outbound rules: regras de saída e exerna
+    - É importante evitar regrad any-to-any (regras que liberam tudo)
+    2. Selecionar o Type da regra
+    3. Selecionar o Source da regra (de qualquer lugar ou de um determinado ip)
+    4. Clicar no botão Save rules
+
+### PING
+    $ ping [ip]
+
+### Regras para o Security Group aceitar pacotes de Ping
+
+1. Selecionar Custom ICMP - IPV4 em Type
+2. Selecionar Echo Reply em Protocol
+3. Selecionar My Ip em Source
+4. Add rule
+5. Selecionar Custom ICMP - IPV4 em Type
+6. Selecionar Echo Request em Protocol
+7. Selecionar My Ip em Source
+8. Save rules
+
+### Testar comunicação com a porta de acesso por meio do SSH
+    $ telnet [ip] 22
+
+### Regras para o Security Group aceitar o acesso via SSH
+    1. Selecionar Custom ICMP - IPV4 em Type
+
+1. Selecionar SSH em Protocol
+2. Preencher o campo Port range com a porta 2222
+3. Selecionar My Ip em Source
+4. Add rule
+5. Save rules
+
+### Liberar a saída de Outbound rules
+São as regras de saída do Security Group
+1. Selecionar HTTP em Type
+2. Selecionar Anywhere para Destination
+3. Add rule
+4. Selecionar HTTPS em Type
+5. Selecionar Anywhere para Destination
+6. Save rules
