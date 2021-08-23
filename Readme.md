@@ -588,3 +588,28 @@ São as regras de saída do Security Group
 4. Selecionar HTTPS em Type
 5. Selecionar Anywhere para Destination
 6. Save rules
+
+### Alterar um Security Group
+1. Selecionar a instância
+2. Clicar em Actions
+3. Clicar em Networking no menu do Actions
+4. Change Security Groups
+    1. Selecionar o Security Group desejado para aquela instância
+
+
+### Elastic IP
+Adicionar um ip estático a uma instância
+
+### Adicionar um Elastic IP a uma instância
+1. Clicar em Elastic IP no submenu Network & Security
+2. Clicar em Allocate Elastic IP address
+    1. Selecionar Amazon's pool of IPv4 addresses
+3. Selecionar o Elastic IP
+3. Clicar em Actions
+4. Clicar em Associate Elastic 
+    1. Selecionar Instance para Resouce type
+    2. Selecionar a instância em Instance
+    3. Selecionar o IP privado que será associado ao Elastic IP
+    4. Associate
+
+### Chaves privadas e públicas
