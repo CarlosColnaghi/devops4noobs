@@ -661,6 +661,22 @@ Adicionar um ip estático a uma instância
 
 
 - O ELB responde por meio do padrão HTTP. Basicamente, existe três tipos de códigos de retorno
-        - 200: requisições realizadas com sucesso
-        - 4xx: requisições realizadas com erros no lado do cliente
-        - 5xx: requisições realizadas com erros no lado do servidor
+    - 200: requisições realizadas com sucesso
+    - 4xx: requisições realizadas com erros no lado do cliente
+    - 5xx: requisições realizadas com erros no lado do servidor
+
+### Tipos de ELB
+- Existem três tipos de elastic load balancing:
+    - Application Load Balancer: trabalha com os protocolos HTTP e HTTPS 
+    - Network Load Balancer: trabalha com os protocolos TCP e UDP
+    - Classic Load Balancer: trabalha com o HTTP, HTTPS e TCP, mas como se trata do primeiro tipo de ELB criado pela AWS, não é muito recomendado  
+
+### Application Load Balancer
+- Atua na camada de aplicação (camada 7) do modelo de referência OSI
+- É recomendado para o balanceamento de tráfego HTTP e HTTPS
+- Roteamento avançado 
+- Escala automaticamente
+- O endereço IP não é estático
+- Permite o uso de stickiness (Quanto o stickness está habilidade, é possível manter uma seção de acesso com um único target. Caso o stickness estiver desabilitado, a conexão estaria apontando para vários targets)
+
+### Algoritmos de Roteamento
