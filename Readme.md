@@ -613,3 +613,36 @@ Adicionar um ip estático a uma instância
     4. Associate
 
 ### Chaves privadas e públicas
+- O objetivo das chaves é criptotagrar e descriptografar informações de login de uma instãncia
+- As chaves públicas são inseridas no arquivo authorize_keys (localizado em ~/ssh/) 
+- Com as chaves privadas é possível descriptografar as informações de login a partir das chaves públicas correspondentes
+
+### Adicionar uma chave
+1. Clicar em Key Pairs no submenu Network & Security
+2. Clicar em Create Key pair
+    1. Colocar o nome do par de chaves no campo Name
+    2. Escolher pem (SSH) em File Format
+    3. Clicar em Create Key pair
+
+### Excluir uma chave
+1. Clicar em Key Pairs no submenu Network & Security
+2. Selecionar a chave a ser excluida
+3. Clicar no botão Actions
+4. No submenu do actions, clicar em Delete
+
+### Importar uma Key pair
+- Nesse caso, o objetivo é importar uma chave já existente em outro ambiente para o ambiente da AWS
+1. Criar uma chave SSH
+    
+        $ ssh-keygen -t rsa -b 2048 
+
+2. Recuperar o conteúdo da chave pública
+        
+        $ cat id_rsa.pub
+
+3. Clicar em Key Pairs no submenu Network & Security
+4. Clicar em Actions
+5. Selecionar Import Key pair do menu do Actions
+    1. Preencher o nome da chave no campo Name
+    2. Colar o conteúdo da chave pública no campo que está abaixo do Name 
+    3. Clicar em Import Key pair
