@@ -646,3 +646,21 @@ Adicionar um ip estático a uma instância
     1. Preencher o nome da chave no campo Name
     2. Colar o conteúdo da chave pública no campo que está abaixo do Name 
     3. Clicar em Import Key pair
+
+### Elastic Load Balancing (ELB)
+- O ELB distribui o tráfego de entrada de aplicativos entre diversos destinos (instâncias, contêiners, endereços IP)
+- É recomendado implementar o ELB quando existe mais de uma zona de dispobilidade (multi AZ)
+- Quando o balanceamento de carga entre as zonas de disponibilidades está ativado, cada instância recebe a mesma quantidade de carga. Em contrapartida, quando o balanceamento de carga entre as zonas de disponibilidades está desativado, cada zona de disponibilidade recebe recebe a mesma carga e por isso pode ser que as instâncias de zonas de disponibilidades diferentes também recebam cargas diferentes, dependendo da distribuição de instâncias entre cada zona de disponibilidade
+- Cada zona de disponibilidade possui uma instância responsável pelo balanceamento de carga
+- Cria um ponto único de acesso (DNS) 
+- Cada elastic load balancing possui hostname estático para o DNS
+- Disponibiliza SSL (HTTPS)
+- Um ELB pode ser privado ou público
+
+### HTTP no ELB
+
+
+- O ELB responde por meio do padrão HTTP. Basicamente, existe três tipos de códigos de retorno
+        - 200: requisições realizadas com sucesso
+        - 4xx: requisições realizadas com erros no lado do cliente
+        - 5xx: requisições realizadas com erros no lado do servidor
