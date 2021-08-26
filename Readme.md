@@ -692,11 +692,21 @@ Adicionar um ip estático a uma instância
 - O endereço pode ser estático
 
 ### Algoritmos de Roteamento do Network Load Balance
-- Algoritmo de hash que se baseia no protocolo, endereço IP e na porta de origem, endereço IP e na porta de destino, nímero de sequência TCP;
+- Algoritmo de hash que se baseia no protocolo, endereço IP e na porta de origem, endereço IP e na porta de destino, número de sequência TCP;
 
-### Classic Load Balancer
+### Classic Load Balance
 - Atua na camada de aplicação (camada 7) e na camada de transporte (camada 4) do modelo de referência OSI
 - É praticamente legado, principalmente, quando se trata do balanceamento de tráfego HTTP e HTTPS
 - Roteamento não avançado
 - Endereço IP não estático
 - Não é recomendado
+
+### Gateway Load Balance
+- Com o Gateway Load Balance é possível executar, gerenciar e escalar Appliances Virtuais (Firewalls, IDS/IPS)
+Exemplos: Check Point, Fortinet Paloalto, Cisco
+- Atua na camada de rede (camada 3) do mode de referência OSI
+- É recomendado para o balanceamento de tráfego IP
+- Implementa o protocolo GENEVE na porta 6081
+- Conexão entre duas ou mais redes
+- Antes de uma requição chegar no seu destino (destination), ela precisa chegar no Gateway Load Balance que enviara a requição para as Appliances (responsáveis pela política de segurança) por meio do protocolo GENEVE na porta 6081
+- Para o Gateway Load Balance, os Appliances são targets
