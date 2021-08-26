@@ -500,7 +500,7 @@ Identficar o UUID do volumes
 
     $ blkid
 
-Em sistemas operacionais Linus, náo é possível montar volumes com os mesmos UUIDs
+Em sistemas operacionais Linux, náo é possível montar volumes com os mesmos UUIDs
 
     $ mount /dev/xdo1 /mnt
 
@@ -671,12 +671,32 @@ Adicionar um ip estático a uma instância
     - Network Load Balancer: trabalha com os protocolos TCP e UDP
     - Classic Load Balancer: trabalha com o HTTP, HTTPS e TCP, mas como se trata do primeiro tipo de ELB criado pela AWS, não é muito recomendado  
 
-### Application Load Balancer
+### Application Load Balance
 - Atua na camada de aplicação (camada 7) do modelo de referência OSI
 - É recomendado para o balanceamento de tráfego HTTP e HTTPS
 - Roteamento avançado 
 - Escala automaticamente
 - O endereço IP não é estático
-- Permite o uso de stickiness (Quanto o stickness está habilidade, é possível manter uma seção de acesso com um único target. Caso o stickness estiver desabilitado, a conexão estaria apontando para vários targets)
+- Permite o uso de stickiness (Quanto o stickness está habilitado, é possível manter uma seção de acesso com um único target. Caso o stickness estiver desabilitado, a conexão poderia estaria apontando para outros targets)
 
-### Algoritmos de Roteamento
+### Algoritmos de Roteamento do Application Load Balance
+- Round Robin: a requisiçào é distribuida entre os targets (uma para cada target)
+- Cabeçalhos HTTP
+- Path: de acordo com o path, é possível redirecionar a requisição para uma determinada pool
+- Origem
+- Descido
+
+### Network Load Balance
+- Atua na camada de transporte (Camada 4) do modelo de refeência OSI
+- É recomendado para o balanceamento de tráfedo TCP e UDP
+- O endereço pode ser estático
+
+### Algoritmos de Roteamento do Network Load Balance
+- Algoritmo de hash que se baseia no protocolo, endereço IP e na porta de origem, endereço IP e na porta de destino, nímero de sequência TCP;
+
+### Classic Load Balancer
+- Atua na camada de aplicação (camada 7) e na camada de transporte (camada 4) do modelo de referência OSI
+- É praticamente legado, principalmente, quando se trata do balanceamento de tráfego HTTP e HTTPS
+- Roteamento não avançado
+- Endereço IP não estático
+- Não é recomendado
