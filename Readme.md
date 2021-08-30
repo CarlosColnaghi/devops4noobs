@@ -671,7 +671,7 @@ Adicionar um ip estático a uma instância
     - Network Load Balancer: trabalha com os protocolos TCP e UDP
     - Classic Load Balancer: trabalha com o HTTP, HTTPS e TCP, mas como se trata do primeiro tipo de ELB criado pela AWS, não é muito recomendado  
 
-### Application Load Balance
+### Application Load Balancer
 - Atua na camada de aplicação (camada 7) do modelo de referência OSI
 - É recomendado para o balanceamento de tráfego HTTP e HTTPS
 - Roteamento avançado 
@@ -679,29 +679,29 @@ Adicionar um ip estático a uma instância
 - O endereço IP não é estático
 - Permite o uso de stickiness (Quanto o stickness está habilitado, é possível manter uma seção de acesso com um único target. Caso o stickness estiver desabilitado, a conexão poderia estaria apontando para outros targets)
 
-### Algoritmos de Roteamento do Application Load Balance
+### Algoritmos de Roteamento do Application Load Balancer
 - Round Robin: a requisiçào é distribuida entre os targets (uma para cada target)
 - Cabeçalhos HTTP
 - Path: de acordo com o path, é possível redirecionar a requisição para uma determinada pool
 - Origem
 - Descido
 
-### Network Load Balance
+### Network Load Balancer
 - Atua na camada de transporte (Camada 4) do modelo de refeência OSI
 - É recomendado para o balanceamento de tráfedo TCP e UDP
 - O endereço pode ser estático
 
-### Algoritmos de Roteamento do Network Load Balance
+### Algoritmos de Roteamento do Network Load Balancer
 - Algoritmo de hash que se baseia no protocolo, endereço IP e na porta de origem, endereço IP e na porta de destino, número de sequência TCP;
 
-### Classic Load Balance
+### Classic Load Balancer
 - Atua na camada de aplicação (camada 7) e na camada de transporte (camada 4) do modelo de referência OSI
 - É praticamente legado, principalmente, quando se trata do balanceamento de tráfego HTTP e HTTPS
 - Roteamento não avançado
 - Endereço IP não estático
 - Não é recomendado
 
-### Gateway Load Balance
+### Gateway Load Balancer
 - Com o Gateway Load Balance é possível executar, gerenciar e escalar Appliances Virtuais (Firewalls, IDS/IPS)
 Exemplos: Check Point, Fortinet Paloalto, Cisco
 - Atua na camada de rede (camada 3) do mode de referência OSI
@@ -710,3 +710,15 @@ Exemplos: Check Point, Fortinet Paloalto, Cisco
 - Conexão entre duas ou mais redes
 - Antes de uma requição chegar no seu destino (destination), ela precisa chegar no Gateway Load Balance que enviara a requição para as Appliances (responsáveis pela política de segurança) por meio do protocolo GENEVE na porta 6081
 - Para o Gateway Load Balance, os Appliances são targets
+
+### Criar um Elastic Load Balancer (Application Load Balancer)
+1. Clicar em Load Balancers no submenu Load Balancing
+2. Clicar em Create Load Balancer
+3. Clicar em Create do Application Load Balancer
+    1. Step 1: Configure Load Balancer
+        1. Preencher o campo Name
+        2. Selecionar a opcão HTTP do Load Balancer Protocol
+        3. Selecionar a VPC
+        4. Selecionar as Zonas de Disponibilidades
+        4. Preenchar a Key e o seu respectivo Value em Tags
+    3.
