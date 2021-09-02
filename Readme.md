@@ -725,7 +725,7 @@ Exemplos: Check Point, Fortinet Paloalto, Cisco
 
     2. Step 3: Configure Security Groups
         1. Selecionar um Security Group
-        3. Next
+        2. Next
 
     3. Step 4: Configure Routing
         1. Selecionar New target group para criar um novo Target group
@@ -748,3 +748,42 @@ Exemplos: Check Point, Fortinet Paloalto, Cisco
 5. Clicar na aba Description
     1. Edit attributes
     2. Marcar a opção Enable do Delete Protection para evitar que o LB seja deletado acidentalmente
+
+### Adicionar Targets no Elastic Load Balancer    
+1. Clicar em Instances no submenu Instances do EC2
+2. Clicar em Launch Instance
+    1. Step 1: Choose AMI
+        1. Escolher a AMI e clicar em Select
+        2. Next
+
+    2. Step 2: Choose an Instance Type
+        1. Selecionar o tipo de instância (t2.micro, por exemplo)
+        2. Next
+    
+    3. Step 3: Configure Instance Details
+        1. Preencher o número de instâncias em Number of Instances (para realizar os testes com o Load Balacer, é interessante que esse número seja maior que 1)
+        2. Selecionar a subnet onde o Load Balancer está localizada
+        3. Em Advanced Details, na seção User Data, é possível incorporar um script para ser executado quando as instancias são criadas:
+
+                #!/bin/bash                                                                     
+                yum update -y
+                yum install httpd -y
+                echo "Olá, eu sou o servidor $(hostname -f)" > /var/www/html/index.html
+                systemctl enable httpd && systemctl start httpd
+
+        4. Step 4: Add Storage
+            1. Next
+        
+        5. Step 5: Add Tags
+            1. Clicar em Add Tags
+            2. Preencher o campo Key e a seu respectivo Value
+        
+        6. Step 6: Configure Security Group
+            1. Selecionar Select an existing security group
+            2. Escolher um Security Group da tabela de Security Groups
+            3. Clicar em Review and Launch
+        
+        7. Step7: Review
+            1. Launch
+
+OBSERVAÇÃO: Para realizar os testes com o serviço Apache, é importante garantir que o Security Group associado as intâncias           
