@@ -721,4 +721,30 @@ Exemplos: Check Point, Fortinet Paloalto, Cisco
         3. Selecionar a VPC
         4. Selecionar as Zonas de Disponibilidades
         4. Preenchar a Key e o seu respectivo Value em Tags
-    3.
+        5. Next
+
+    2. Step 3: Configure Security Groups
+        1. Selecionar um Security Group
+        3. Next
+
+    3. Step 4: Configure Routing
+        1. Selecionar New target group para criar um novo Target group
+        2. Preencher o campo Name
+        3. Selecionar Instance para enviar todos os pacotes (tráfego) para um conjunto de instâncias
+        4. Selecionar o protocolo HTTP do Target Group
+        5. Preencher 80 como a porta do protocolo (a porta da instância que o Load Balancer precisa encaminhar)
+        6. Selecionar o protocolo em HTTP do Health Check
+        7. Colocar a pasta raiz ("/") para realizar o Health Check e determinar a integridade do serviço
+        8. Configurar os parâmetros do Advanced health check settings
+        9. Next
+    
+    4. Step 5: Register Targets
+        1. Next
+
+    5. Step 6: Review
+        1. Create
+
+4. Selecionar o Load Balancer criado nos passos anteriores
+5. Clicar na aba Description
+    1. Edit attributes
+    2. Marcar a opção Enable do Delete Protection para evitar que o LB seja deletado acidentalmente
