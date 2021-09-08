@@ -786,4 +786,16 @@ Exemplos: Check Point, Fortinet Paloalto, Cisco
         7. Step7: Review
             1. Launch
 
-OBSERVAÇÃO: Para realizar os testes com o serviço Apache, é importante garantir que o Security Group associado as intâncias           
+OBSERVAÇÃO: Para realizar os testes com o serviço Apache, é importante garantir que o Security Group associado as intâncias estejam com a porta 80 e o protocolo HTTP
+
+3. Entrar em Target Groups da Seção Load Balancing a partir do menu na lateral esquerda
+4. Selecionar o Target Group desejado para adicionar os Targets
+    1. Clicar em Edit da seção Attributes
+        - Deregistration delay: tempo esperado antes de remover um Target de um Targer Group. O propósito é minimizar problemas de conexão enquanto o usuário estiver usando o serviço do Target.
+        - Slow start duration: tempo esperado antes do Target Group permetir que um Targer comece a receber conexões.
+        - Load balancing algorithm: é o algoritmo para o balanceamento de carga 
+    2. Clicar na aba Targets da seção de Targets Groups
+        1. Clicar em Register targets para adicionar os Targets
+        2. Selecionar as instâncias que serão adicionadas como Targets
+        3. Clicar em Register pending targets
+5. Copiar o DNS name do Load Balancer na aba Description para poder acessar os serviços que estão rodando nas instâncias marcadas como Targets
