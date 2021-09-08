@@ -799,3 +799,7 @@ OBSERVAÇÃO: Para realizar os testes com o serviço Apache, é importante garan
         2. Selecionar as instâncias que serão adicionadas como Targets
         3. Clicar em Register pending targets
 5. Copiar o DNS name do Load Balancer na aba Description para poder acessar os serviços que estão rodando nas instâncias marcadas como Targets
+
+
+### Health Check
+É uma ferramenta para garantir a integridade dos serviços que estão rodando nas instâncias do Load Balancer. A checagem da saúde do serviço acontece periodicamente a partir do envio de requisições e checagem dos status code das respostas
