@@ -803,3 +803,13 @@ OBSERVAÇÃO: Para realizar os testes com o serviço Apache, é importante garan
 
 ### Health Check
 É uma ferramenta para garantir a integridade dos serviços que estão rodando nas instâncias do Load Balancer. A checagem da saúde do serviço acontece periodicamente a partir do envio de requisições e checagem dos status code das respostas
+
+1. Acessar as instâncias que estão no Target Group pelo terminal 
+2. Verificar o status do serviço httpd
+
+        $ systemctl status httpd
+
+3. Verificar o log do serviço httpd. No log, pode ser indentificado a açào do Health Check
+
+        $ cd /var/log/httpd
+        $ tail -f access_log
