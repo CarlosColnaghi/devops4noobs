@@ -813,3 +813,9 @@ OBSERVAÇÃO: Para realizar os testes com o serviço Apache, é importante garan
 
         $ cd /var/log/httpd
         $ tail -f access_log
+
+### Roteamento Avançado com Elastic Load Balancer
+
+No menu de controle dos Load Balancers, é possível criar regras que determinam os comportamentos dos tráfegos. Por padrão, toda requisição é redirecionada para um Load Balancer. Contudo, o sistema de controle da AWS permite criar novas regras. As regras podem redirionar as requisições que chegam na porta que esta rodando um serviço HTTP (porta 80), para o serviço HTTPS, por exemplo
+
+1. Entrar no menu de controle dos Load Balancers clicando na opção 
