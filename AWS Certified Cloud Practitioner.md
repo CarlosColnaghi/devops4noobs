@@ -60,9 +60,9 @@
 - O Security Group chamado de Default, permite todo o tráfego de entrada dentro da rede determinada em Source (rede padrão, também conhecida como Default VPC)
 
 ### Alterando a associação dos Security Group com uma EC2 Instance
-	1. Na tabela de instâncias EC2, selecione a máquina que se deseja mudar os Security Groups
-	2. Depois de selecionar a instância, clique no botão Actions e selecione Change Security Networking no menu Instance Settings
-	3. Selecione os Security Groups desejados para arquela instância
+1. Na tabela de instâncias EC2, selecione a máquina que se deseja mudar os Security Groups
+2. Depois de selecionar a instância, clique no botão Actions e selecione Change Security Networking no menu Instance Settings
+3. Selecione os Security Groups desejados para arquela instância
 
 ## Criando uma instância EC2 customizada
 
@@ -94,12 +94,67 @@
 - É possível programar o RDS para realizar snapshots para backup do banco de dados
 - A máquina não deve ser gerenciada, e sim o serviço. Ou seja, não é possível se conectar e interagir com a instância em si, mas é possivel se conectar ao banco de dados
 
-## Infraestutura de alta disponibilidade com o Auto Scaling
+## Infraestutura com Auto Scaling e Load Balancing
 
-- A imagem demonstra ua infraestrutura com alta disponibilidade. Os usuários conseguem acessar os serviços por meio do navegador que enviar requisições para a rede da AWS por meio dos protocolos HTTP e HTTPS, usando, respectivamente, as postas 80 e 443. O tráfego é direcionado para um Load Balancer. O Load Balancer é responsável pela distribuição de carga e, portanto, direciona as réplicas das instâncias onde um aplicativo está em execução. Todas as instâncias se conectam ao banco de dados para poder realizar a comunicação que garante a persistência de dados
+- A imagem demonstra uma infraestrutura com alta disponibilidade. Os usuários conseguem acessar os serviços por meio do navegador que enviam requisições para a rede da AWS por meio dos protocolos HTTP e HTTPS, usando, respectivamente, as postas 80 e 443. O tráfego é direcionado para um Load Balancer. O Load Balancer é responsável pela distribuição de carga e, portanto, direciona para as réplicas das instâncias onde um aplicativo está em execução. Todas as instâncias se conectam ao banco de dados para poder realizar a comunicação que garante a persistência de dados da aplicação
 
 ![[Load Balancer.png]]
+
+## Load Balancers
 
 - 3 tipos de Load Balancers
 	- Application Load Balancer: protocolo HTTP e HTTPS
 	- Network Load Balancer: outros protocolos (TCP, TLC, UDP)
+1. No dashboard de Load Balancers clique em Cread Load Balancer
+2. Depois, selecione o tipo Load Balancer (Application Load Balancer e Network Load Balancer)
+3. Defina o scheme (Internet Facing e Internal)
+	- Internet Facing: responde para a internet
+	- Internal: responde somente dentro da rede da AWS
+4. Defina os protolos e portas dos Listerners do Load Balancer
+5. Para garantir a redundancia e, consequentemente a disponibilidade, é necessário escolher pelo menos duas Availability Zones ou subnets
+6. Configure o Security Group com regras de inbound para aceitar os protocolos e as portas definidas para os Listerners
+7. Configure o roteamento definindo o Target Group. O Target Group agrupa todas as instâncias que Load Balancer vai direcionar o tráfego
+8. Defina o Health Check referenciando o protocolo e o caminho onde o requesição será realizada para verificar se o serviço está saudável
+9. Por fim, registre  os Targets. Os Targets podem ser as instâncias ou um grupo do Auto Scaling
+
+## Auto Scaling
+
+- O Auto Scaling permite escalar os recursos, ou seja, criar novas instâncias de acordo o tráfego
+- O Auto Scaling gerencia a quantidade de instâncias a partir do tráfego e dos parâmetros definidos pelo Auto Scaling Group
+- Para configurar o Auto Scaling, primeiramente é necessário criar uma configuração de lançamento (Launch Configuration) para depois associar essa configuração ao Auto Scaling Group
+	1. Clique em Create Auto Scaling Group
+	2. Defina a VPC e as Subnets. É importante que as Subnets sejam as mesmas selecionadas na criação do Load Balancer
+	3. Determine o tamanho do grupo (Group size), ou seja, a quantidade de instâncias
+	4. Em Load Balancing, selecione a opção de receber o tráfico de um ou mais Load Balancers. Essa opção é importante para que se consiga associar a um  Auto Scaling Group.
+	5. Em Target Groups, selecione o Target Group definido durante a criação do Load Balancer
+	6. Defina o tipo de Health Check. Existem dois tipos: ELB e EC2. O ELB é um teste da aplicação e por isso, testa se a porta esta respondendo. Em contrapartida, o tipo EC2 considera os estados da instância (stopping, terminated). O Auto Scaling Group também usa como referência para adicionar ou remover uma instância do Target Group
+- O Scaling Policy define políticas de escalonamento da quantidade de instâncias. Então, é possível definir condições baseadas em métricas, cmo consumo de processador ou memória, por exemplo
+
+## AWS CLI
+
+- É uma ferramenta de linha de comando integrada que permite gerenciar interagir com os recursos e serviços da AWS, assim como o console da AWS
+- O acesso depende de um usuário com Access Key e Secret Key
+
+### Descrever as informações das instâncias (Security group, regras, rede, tipos de instância, estado)
+
+```shell
+aws ec2 describe-instances
+```
+
+```shell
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{Instance:[InstanceId,State]}"
+```
+
+```shell
+aws ec2 describe-instances --instance-id {instance_id}
+```
+
+### Parar e iniciar instâncias
+
+```shell
+aws ec2 start-instances {instance_id}
+```
+
+```shell
+aws ec2 stop-instances {instance_id}
+```
