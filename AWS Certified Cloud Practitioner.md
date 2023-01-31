@@ -130,7 +130,7 @@
 	6. Defina o tipo de Health Check. Existem dois tipos: ELB e EC2. O ELB é um teste da aplicação e por isso, testa se a porta esta respondendo. Em contrapartida, o tipo EC2 considera os estados da instância (stopping, terminated). O Auto Scaling Group também usa como referência para adicionar ou remover uma instância do Target Group
 - O Scaling Policy define políticas de escalonamento da quantidade de instâncias. Então, é possível definir condições baseadas em métricas, cmo consumo de processador ou memória, por exemplo
 
-## AWS CLI
+# AWS CLI
 
 - É uma ferramenta de linha de comando integrada que permite gerenciar interagir com os recursos e serviços da AWS, assim como o console da AWS
 - O acesso depende de um usuário com Access Key e Secret Key
@@ -158,3 +158,45 @@ aws ec2 start-instances {instance_id}
 ```shell
 aws ec2 stop-instances {instance_id}
 ```
+
+# Amazon Lightsail
+
+## O que é Lightsail
+
+- A proposta do Lightsail é tornar a nuvem mais simples (tanto em relação ao console, quanto com relação a configuração)
+- Esta dentro da nuvem da Amazon e possuem suas zonas de disponibilidade
+- Instâncias, snapshots para backup, balanceamento de carga, discos e entre outros
+- Para criar uma instância é obrigatório realizar a definição da imagem (OS ou APP + OS) e da localidade (Região/Zona)
+- Bitnami é provedor que empacota várias aplicações e distribuem elas como imagens
+- É possível acessar as máquinas criadas via console ou cliente SSH
+
+## IP Estático
+
+- Toda vez que a instância é parada e iniciada novamente, um novo ip é criado para ela. 
+	1. Vá na aba Networking e clique em Create static ip
+	2. Selecione a instância
+	3. Crie um nome para o ip estático
+- É possível registrar o domínio em um provedor e apontar para que o Lightsail seja autoritativo do domínio por meio das zonas de disponibilidade
+
+## SSH Client
+
+- É possível se conectar uma instância via SSH por meio da interface do próprio navegador. Contudo, também é possível se conectar usando client e o par de chaves gerados durante a criação da instância
+	1. Selecione a instância e clique em manage
+	2. Clique Account page e o Lightsail vai direcionar para a aba SSH Keys
+- Quando uma instância é criada, o Lightsail já cria um par de chaves. Contudo, também é possível criar um par de chaves e associar durante a instanciação
+- Para cada região, o Lightsail cria automaticamente um par de chaves SSH com o nome Default
+
+## Firewall
+
+- São regras de rede que gerencia o tráfego de rede
+	1. Clique na aba Networking de uma instância
+	2. Na seção Firewall, clique em Add another e defina o tipo de protocolo e o intervalo da porta
+	3. Por fim, clique em Salve para gravar as regras adicionadas
+- Diferentemente do Security Group, não é possível definir o intervalo de ips que podem trafegar sobre aquela regra
+
+## Snapshot
+
+- Antes de criar um snapshot é importante parar a instância, porque podem existir vários arquivos que estão aberto em memória e isso pode gerar uma imagem corrompida
+	1. Clique na aba Snapshots de uma instância
+	2. Clique em Create snapshot
+	3. A partir do snaptshots, é possível criar uma instância deste snapshot em Create new instance
