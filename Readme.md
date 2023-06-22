@@ -187,12 +187,36 @@ São marcações que representam uma versão da release do projeto
 
 ## Serviços
 
-- EC2
-- VPC
-- Route 53
-- S3
-- Cloud Watch
-- IAM
+Os serviços da AWS são soluções disponibilizadas para desenvolver toda uma infraestrutura em cloud
+
+- EC2: ambiente de computação (máquinas)
+- VPC: ambiente de rede
+- Route 53: dns
+- S3: armazenamento
+- Cloud Watch: monitoramento de 
+- IAM: gestão e controle de acessos
+
+## AWS Free Tier
+
+Para novos clientes, a AWS disponibiliza um nível de gratuidade chamada de Free Tier para as suas novas contas. O Free Tier possui limites dependendo do serviço e é compreendido por níveis:
+
+    - Sempre gratuito
+    - 12 meses gratuitos
+    - Testes (curto prazo)
+
+O Free Tier é caracterizado por não ser acumulativo, ou seja, caso não use o beneficío naquele determinado momento e com aquelas restrições ele não vai se acumular para ser usado em um próximo momento. Uma outra característica é que o Free Tier possui limites dependendo dos níveis e dos serviços
+
+## Root User e IAM User
+
+O root user é usuário proprietário da conta. A partir do usuário raiz, é possível realizar as primeiras interações com o console da AWS e criar os outros usuário da conta (também chamados de IAM users). Durante o acesso ao console da AWS, enquanto o usuário root precisa inserir o e-mail da conta, o usuário IAM tem que colocar o ID da conta que esta vinculada ao root user
+
+## Multi Factor Authentication (MFA)
+
+É uma segunda camada de segurança representada por uma "contrasenha" dinâmica (geralmente um código)
+
+    - MFA Virtuais: aplicativo (Authy e Google Authenticator)
+    - U2F Security Key: dispositivo conectado em porta USB
+    - MFA de Hardware: dispositvo que gera os códigos
 
 ## AWS CLI
 1.  Criar um novo grupo de administradores
