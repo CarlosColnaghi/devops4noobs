@@ -218,6 +218,19 @@ O root user é usuário proprietário da conta. A partir do usuário raiz, é po
     - U2F Security Key: dispositivo conectado em porta USB
     - MFA de Hardware: dispositvo que gera os códigos
 
+Para habilitar o MFA para o root user é necessário:
+    1. No serviço IAM, entrar na página Security Credentials
+    2. Na seção Multi-factor authentication (MFA), existe um botão Assign MFA device responsável pelo cadastro do MFA
+    3. Por fim, é preciso selecionar o dispositivo desejado e associar um nome ao dispositivo
+
+## Contatos Alternativos
+
+Os contatos alternativos são informações que a AWS pode usar para se comunicar com os representantes de cobrança, operação ou segurança. Em situações onde a AWS consiga identificar uma cobrança fora do padrão ou o vazamento de credenciais, ela pode tentar entrar em contato os representantes usando as informações cadastradas na conta root
+
+## Respostas de segurança
+
+As respostas também são cadastradas no dashboard da conta root. O objetivo delas é criar uma outra camada de segurança e criar uma outra maneira da AWS garantir a identidade do proprietário da conta
+
 ## AWS CLI
 1.  Criar um novo grupo de administradores
     - Group Name: nome_do_grupo
