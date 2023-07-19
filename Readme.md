@@ -212,7 +212,7 @@ O root user é usuário proprietário da conta. A partir do usuário raiz, é po
 
 ## Multi Factor Authentication (MFA)
 
-É uma segunda camada de segurança representada por uma "contrasenha" dinâmica (geralmente um código)
+É uma segunda camada de segurança representada por uma "contrasenha" dinâmica (geralmente um código):
 
     - MFA Virtuais: aplicativo (Authy e Google Authenticator)
     - U2F Security Key: dispositivo conectado em porta USB
@@ -220,7 +220,7 @@ O root user é usuário proprietário da conta. A partir do usuário raiz, é po
 
 Para habilitar o MFA para o root user é necessário:
     1. No serviço IAM, entrar na página Security Credentials
-    2. Na seção Multi-factor authentication (MFA), existe um botão Assign MFA device responsável pelo cadastro do MFA
+    2. Na seção Multi-factor authentication (MFA), existe um botão Assign MFA device responsável pelo cadastro do MFA. Clique nesse botão para habilitar o MFA
     3. Por fim, é preciso selecionar o dispositivo desejado e associar um nome ao dispositivo
 
 ## Contatos Alternativos
@@ -232,44 +232,51 @@ Os contatos alternativos são informações que a AWS pode usar para se comunica
 As respostas também são cadastradas no dashboard da conta root. O objetivo delas é criar uma outra camada de segurança e criar uma outra maneira da AWS garantir a identidade do proprietário da conta
 
 ## AWS CLI
-1.  Criar um novo grupo de administradores
-    - Group Name: nome_do_grupo
-    - Attach Policy: AdministratorAccess
 
-2. Adicionar um novo usuario
-    - User name: nome_do_usuario
-    - Acess type: Selecionar "Programatic access"
-    - Add user to group: Selecionar "nome_do_grupo"
+Existem várias manerias de interagir com AWS e a AWS CLI é uma delas. O CLI é uma aplicação integrada ao terminal que permite implementar, gerenciar e interagir com os recursos disponibilizados pela AWS. Na documentação da AWS é possível encontrar o passo a passo de instalação a partir do sistema operacional:
+    
+https://docs.aws.amazon.com/pt_br/cli/latest/userguide/getting-started-install.html
 
-### Comandos
-Iniciar o processo de configuração do AWS CLI
+### Criar um usuário para usar no AWS CLI
+1. Entre no serviço de gerenciamento de acessos (IAM) e acesse a página User Groups pelo menu lateral
+2. Depois, associe as políticas de acesso para esse grupo de usuários e clique no botão Create group. Nessa etapa, é importante deixar desmarcado a caixa de seleção que libera acesso ao console da AWS
+3. No menu lateral do IAM, selecione a opção para criar usuários: Users. Por fim, atache o usuário ao grupo de usuários criados anteriormente
+4. Com o usuário criado, selecione-o para visualiza-lo e na aba Security credentials, clique em Create access key
+5. Marque a opção Command Line Interface (CLI) para gerar as credencias de acesso e por fim, grave essas credenciais em um lugar seguro
+
+### Configurar as credendiais do usuário no AWS CLI
 
     $ aws configure
-
-### Configuração
 
     AWS Access Key ID: *******
     AWS Secret Access Key: *******
     Default region name: us-east-1
     Default output format: json
 
+## Modelo de Responsabilidade Compartilhada
+
+O modelo de responsabilidade compartilhada, como o próprio nome sugere, é representado por um conjunto de diretrizes de segurança da nuvem onde a AWS compartilha as responsabilidades com o cliente. A AWS, por exemplo, se responsabiliza do hardware e software que são entregues como serviços. Com relação ao hardware, a AWS precisa cuidar dos servidores, data centers, regiões e zonas de disponibilidade. Enquanto que, com relação ao software, a AWS se responsabiliza com a disponibilização da computação e hypervisors, armazenamento, banco de dados, rede e outros serviços SaaS (RDS e MSK, por exemplo). Em contrapartida, o cliente precisa se responsabilizar aos dados, configurações do sistema operacional e firewall e gerenciamento de acessos (IAM)
+
 ## EC2 (Elastic Compute Cloud)
 
-### Conteúdos
+O EC2 trata-se de um serviço da AWS que disponibiliza recursos de computação com capacidade "dimensionável" onde não é necessário investimento em hardware. Esse serviço compreende os seguintes pontos:
+
 - Instâncias (virtualização de máquinas e servidores)
-- Balanceamento de Carga (Load Balance)
+- Balanceamento de Carga (Load Balancer)
 - Escalonamento (AWS Auto Scaling)
-- Armazenamento
+- Armazenamento (EBS, S3)
 - Segurança (keys)
 
 ### Regiões, Zonas de Disponibilidade e Zonas Locais
 
-Cada região é composta por pelo menos três data centers que representam as zonas de disponibilidades (AZ). Já as zonas locais se conectam a uma ou mais zonas de disponibilidade para diminuir a latência
+Cada região é composta por pelo menos três data centers que representam as zonas de disponibilidades (AZ). É muito comum encontrar o termo Multi AZ. Quando o serviço é Multi AZ, quer dizer que possui alta disponibilidade, uma vez que o serviço está hospedado em mais de uma zona de disponibilidade. Já as zonas locais se conectam a uma ou mais zonas de disponibilidade para diminuir a latência com o cliente. As conexões entre zonas de disponibilidades, zonas locais e clientes consideram os seguintes componentes:
 
-- Direct Connect: conexão entre uma zona local e o cliente
-- Backbone: conexão entre uma zona local e uma zona de disponibilidaade
+- Direct Connect: conexão dedicada entre uma zona local e o cliente
+- Backbone: conexão entre uma zona local e uma zona de disponibilidade
 
 ### Tipos de instâncias EC2
+
+A AWS disponibiliza vários tipos de instâncias que possuem caraceristicas próprias baseadas em seus recursos. As máquinas de uso geral, por exemplo, são caracterizadas por serem destinadas a propósitos gerais, com recursos equilibrados e intermediários. Também, determinadas famílias de máquinas são limitadas por créditos de cpu. A família T, por exemplo, (t3 e t4) é baseada nessa política. No momento em que esse limite é ultrapassado, o desempenho de processamento é reduzido ou ele se mantem, entretanto, tarifas são cobradas sobre esse limite. As principais categorias de máquinas EC2 são para:
 
 - Uso geral
 - Otimizadas para CPU
