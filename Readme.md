@@ -187,7 +187,7 @@ São marcações que representam uma versão da release do projeto
 
 ## Serviços
 
-Os serviços da AWS são soluções disponibilizadas para desenvolver toda uma infraestrutura em cloud
+Os serviços da AWS são soluções disponibilizadas para desenvolver a infraestrutura em cloud
 
 - EC2: ambiente de computação (máquinas)
 - VPC: ambiente de rede
@@ -202,26 +202,38 @@ Para novos clientes, a AWS disponibiliza um nível de gratuidade chamada de Free
 
     - Sempre gratuito
     - 12 meses gratuitos
-    - Testes (curto prazo)
+    - Testes (são de curto prazo)
 
-O Free Tier é caracterizado por não ser acumulativo, ou seja, caso não use o beneficío naquele determinado momento e com aquelas restrições ele não vai se acumular para ser usado em um próximo momento. Uma outra característica é que o Free Tier possui limites dependendo dos níveis e dos serviços
+O Free Tier é caracterizado por não ser acumulativo, ou seja, caso não use o beneficío naquele determinado momento e com aquelas determinadas restrições ele não vai se acumular para ser usado em um próximo momento. Uma outra característica é que o Free Tier possui limites dependendo dos níveis e dos serviços
 
 ## Root User e IAM User
 
-O root user é usuário proprietário da conta. A partir do usuário raiz, é possível realizar as primeiras interações com o console da AWS e criar os outros usuário da conta (também chamados de IAM users). Durante o acesso ao console da AWS, enquanto o usuário root precisa inserir o e-mail da conta, o usuário IAM tem que colocar o ID da conta que esta vinculada ao root user
+Existem duas maneiras de acessar o console da AWS: uma por meio de um root user e a outra a partir de um IAM user (usuário não root). O root user é usuário proprietário da conta. A partir do usuário raiz, é possível realizar as primeiras interações com o console da AWS e criar os outros usuário da conta (também chamados de IAM users). Durante o acesso ao console da AWS, enquanto o usuário root precisa inserir o e-mail da conta, o usuário IAM tem que colocar o ID da conta que esta vinculada ao root user
 
 ## Multi Factor Authentication (MFA)
 
-É uma segunda camada de segurança representada por uma "contrasenha" dinâmica (geralmente um código):
+É uma segunda camada de segurança representada por uma "contrasenha" dinâmica (geralmente um código de segurança):
 
     - MFA Virtuais: aplicativo (Authy e Google Authenticator)
     - U2F Security Key: dispositivo conectado em porta USB
     - MFA de Hardware: dispositvo que gera os códigos
 
-Para habilitar o MFA para o root user é necessário:
+Para habilitar o MFA para o root user é necessário seguir os seguintes passos:
+
     1. No serviço IAM, entrar na página Security Credentials
-    2. Na seção Multi-factor authentication (MFA), existe um botão Assign MFA device responsável pelo cadastro do MFA. Clique nesse botão para habilitar o MFA
+    2. Na seção Multi-factor authentication (MFA), existe o botão Assign MFA device, responsável pelo cadastro do MFA. Clique nesse botão para habilitar o MFA
     3. Por fim, é preciso selecionar o dispositivo desejado e associar um nome ao dispositivo
+    4. Configurar o dispositivo de acordo com o device selecionado
+
+Com um nome vinculado ao dispositivo, é possível cadastrar mais que um dispositivo
+
+## Políticas de senha
+
+As políticas de senha definem regras que precisam ser seguidas ao criar uma senha para um novo usuário
+
+    1. No serviço IAM, basta acessar a página Account Settings
+    2. Clique em editar na seção Password policy
+    3. Configure as regras de acordo com duas diretrizes: IAM default ou Custom
 
 ## Contatos Alternativos
 
@@ -283,6 +295,8 @@ A AWS disponibiliza vários tipos de instâncias que possuem caraceristicas pró
 - Otimizadas para RAM
 - GPU
 - Otimizadas para Armazenamento
+
+Entrando no serviço de EC2 no console da AWS, no submenu ao lado, existe a opção Tipos de Instância (Instance Types). Essa opção traz uma lista com todas as instâncias disponiveis na AWS
 
 ### Criar instâncias EC2
 
