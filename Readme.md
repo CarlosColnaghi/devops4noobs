@@ -225,7 +225,7 @@ Para habilitar o MFA para o root user é necessário seguir os seguintes passos:
     3. Por fim, é preciso selecionar o dispositivo desejado e associar um nome ao dispositivo
     4. Configurar o dispositivo de acordo com o device selecionado
 
-Com um nome vinculado ao dispositivo, é possível cadastrar mais que um dispositivo
+Com um nome vinculado ao dispositivo, é possível cadastrar mais de um dispositivo
 
 ## Políticas de senha
 
@@ -239,9 +239,9 @@ As políticas de senha definem regras que precisam ser seguidas ao criar uma sen
 
 Os contatos alternativos são informações que a AWS pode usar para se comunicar com os representantes de cobrança, operação ou segurança. Em situações onde a AWS consiga identificar uma cobrança fora do padrão ou o vazamento de credenciais, ela pode tentar entrar em contato os representantes usando as informações cadastradas na conta root
 
-## Respostas de segurança
+## Respostas de seguraça
 
-As respostas também são cadastradas no dashboard da conta root. O objetivo delas é criar uma outra camada de segurança e criar uma outra maneira da AWS garantir a identidade do proprietário da conta
+As respostas também são cadastradas no dashboard de configuração da conta root. O objetivo delas é criar uma outra camada de segurança e criar uma outra maneira da AWS garantir a identidade do proprietário da conta, assim como, disponibiliza um novo meio de recuperar a conta caso ela seja perdida
 
 ## AWS CLI
 
@@ -249,14 +249,23 @@ Existem várias manerias de interagir com AWS e a AWS CLI é uma delas. O CLI é
     
 https://docs.aws.amazon.com/pt_br/cli/latest/userguide/getting-started-install.html
 
+Atualmente, a versão recomendada para uso é a 2.x. Caso instale a versão 1.x é recomendado migrar e atualizar para a versão mais nova
+
 ### Criar um usuário para usar no AWS CLI
+
+Usar a conta root para realizar as tarefas do dia a dia não é considerado uma boa prática. Por isso é importante criar um novo usuário e usar a conta root somente quando necessário
+
 1. Entre no serviço de gerenciamento de acessos (IAM) e acesse a página User Groups pelo menu lateral
-2. Depois, associe as políticas de acesso para esse grupo de usuários e clique no botão Create group. Nessa etapa, é importante deixar desmarcado a caixa de seleção que libera acesso ao console da AWS
-3. No menu lateral do IAM, selecione a opção para criar usuários: Users. Por fim, atache o usuário ao grupo de usuários criados anteriormente
-4. Com o usuário criado, selecione-o para visualiza-lo e na aba Security credentials, clique em Create access key
+2. Depois, associe as políticas de acesso para esse grupo de usuários e clique no botão Create group. Nessa etapa, é possível identificar dois tipos de políticas: uma criada e gerenciada pela AWS, enquanto que a outra é criada pelos usuários
+3. No menu lateral do IAM, selecione a opção para criar usuários (Users). Por fim,  preencha o nome do usuário e associe o usuário ao grupo de usuários criados anteriormente
+4. Com o usuário criado, selecione-o para visualiza-lo no dashboard de gerenciamento de usuários e na aba Security credentials, clique em Create access key
 5. Marque a opção Command Line Interface (CLI) para gerar as credencias de acesso e por fim, grave essas credenciais em um lugar seguro
 
+Durante a criação de um usuário é importante saber a maneira como esse usuário quer interagir com a AWS. Se a ideia é que esse usuário acesse somente o console da AWS ou somente o CLI, é necessário marcar as respectivas caixas de seleção que esses privilégios
+
 ### Configurar as credendiais do usuário no AWS CLI
+
+No termial execute o comando da CLI para configurar as credencias de acesso geradas durante a seção anterior:
 
     $ aws configure
 
@@ -264,6 +273,20 @@ https://docs.aws.amazon.com/pt_br/cli/latest/userguide/getting-started-install.h
     AWS Secret Access Key: *******
     Default region name: us-east-1
     Default output format: json
+
+Para listar as credencias de acesso cadastradas no CLI é necessário rodar o seguinte comando:
+
+    $ aws configure list
+
+Uma credencial de acesso também pode ser cadastrada a partir de profiles. Com os perfis, o usuário consegue cadastrar mais de uma credencial de acesso:
+
+    $ aws configure --profile my-profile
+
+Por padrão o profile padrão é chamado de default
+
+Para identificar o usuário da AWS que a CLI esta usando parar executar os comandos, bastar executar o seguinte comando no terminal:
+
+    $ aws sts get-caller-identity
 
 ## Modelo de Responsabilidade Compartilhada
 
