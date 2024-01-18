@@ -185,6 +185,10 @@ São marcações que representam uma versão da release do projeto
 
 # AWS
 
+Esta documentação usou como referências os seguintes conteúdos:
+    
+- https://www.udemy.com/course/aws-na-pratica/
+
 ## Serviços
 
 Os serviços da AWS são soluções disponibilizadas para desenvolver a infraestrutura em cloud
@@ -292,32 +296,46 @@ Para identificar o usuário da AWS que a CLI esta usando parar executar os coman
 
 O modelo de responsabilidade compartilhada, como o próprio nome sugere, é representado por um conjunto de diretrizes de segurança da nuvem onde a AWS compartilha as responsabilidades com o cliente. A AWS, por exemplo, se responsabiliza do hardware e software que são entregues como serviços. Com relação ao hardware, a AWS precisa cuidar dos servidores, data centers, regiões e zonas de disponibilidade. Enquanto que, com relação ao software, a AWS se responsabiliza com a disponibilização da computação e hypervisors, armazenamento, banco de dados, rede e outros serviços SaaS (RDS e MSK, por exemplo). Em contrapartida, o cliente precisa se responsabilizar aos dados, configurações do sistema operacional e firewall e gerenciamento de acessos (IAM)
 
+![Modelo de Responsabilidade Compartilhada](img/modelo-responsabilidade-compartilhada.png)
+Fonte: https://aws.amazon.com/pt/compliance/shared-responsibility-model/
+
+Nesse contexto, os serviços podem ser classificados como:
+    
+    1. on premise: o cliente possui responsabilidade sobre toda a infraestrutura do servidor
+    2. iaas: a plataforma disponibiliza a infraestrutura como serviço
+    3. paas: a plataforma disponibiliza a plataforma como serviço
+    4. saas: a plataforma disponibiliza o software como serviço
+
+Sobre cada serviço o compartilhamento de resposabilidades entre cliente e AWS acontece sobre aspectos diferentes:
+
+![Modelo de Responsabilidade Compartilhada](img/modelo-responsabilidade-compartilhada-2.png)
+
 ## EC2 (Elastic Compute Cloud)
 
 O EC2 trata-se de um serviço da AWS que disponibiliza recursos de computação com capacidade "dimensionável" onde não é necessário investimento em hardware. Esse serviço compreende os seguintes pontos:
 
 - Instâncias (virtualização de máquinas e servidores)
-- Balanceamento de Carga (Load Balancer)
+- Balanceamento de carga (Load Balancer)
 - Escalonamento (AWS Auto Scaling)
 - Armazenamento (EBS, S3)
 - Segurança (keys)
 
 ### Regiões, Zonas de Disponibilidade e Zonas Locais
 
-Cada região é composta por pelo menos três data centers que representam as zonas de disponibilidades (AZ). É muito comum encontrar o termo Multi AZ. Quando o serviço é Multi AZ, quer dizer que possui alta disponibilidade, uma vez que o serviço está hospedado em mais de uma zona de disponibilidade. Já as zonas locais se conectam a uma ou mais zonas de disponibilidade para diminuir a latência com o cliente. As conexões entre zonas de disponibilidades, zonas locais e clientes consideram os seguintes componentes:
+Cada região é composta por pelo menos três data centers que representam as zonas de disponibilidades (também chamadas de AZ). As zonas de disponibilidades estão conectadas entre si. É muito comum encontrar o termo Multi AZ. Quando o serviço é Multi AZ, quer dizer que possui alta disponibilidade, uma vez que o serviço está hospedado em mais de uma zona de disponibilidade. Já as zonas locais se conectam a uma ou mais zonas de disponibilidade para diminuir a latência com o cliente (por estarem em locais que estão mais próximos dos clientes). As conexões entre zonas de disponibilidades, zonas locais e clientes consideram os seguintes componentes:
 
 - Direct Connect: conexão dedicada entre uma zona local e o cliente
 - Backbone: conexão entre uma zona local e uma zona de disponibilidade
 
 ### Tipos de instâncias EC2
 
-A AWS disponibiliza vários tipos de instâncias que possuem caraceristicas próprias baseadas em seus recursos. As máquinas de uso geral, por exemplo, são caracterizadas por serem destinadas a propósitos gerais, com recursos equilibrados e intermediários. Também, determinadas famílias de máquinas são limitadas por créditos de cpu. A família T, por exemplo, (t3 e t4) é baseada nessa política. No momento em que esse limite é ultrapassado, o desempenho de processamento é reduzido ou ele se mantem, entretanto, tarifas são cobradas sobre esse limite. As principais categorias de máquinas EC2 são para:
+A AWS disponibiliza vários tipos de instâncias que possuem caraceristicas próprias baseadas em seus recursos. As máquinas de uso geral, por exemplo, são caracterizadas por serem destinadas a propósitos gerais, com recursos equilibrados e intermediários. Também, determinadas famílias de máquinas são limitadas por créditos de cpu. A família T, por exemplo, (t3 e t4) é baseada nessa política. No momento em que esse limite é ultrapassado, o desempenho de processamento é reduzido ou ele se mantem, entretanto, tarifas são cobradas sobre esse limite. Basicamente, um crédito de cpu disponibiliza o desempenho de um núcleo em 100% de utilização por um minuto. As principais categorias de máquinas EC2 são para:
 
 - Uso geral
-- Otimizadas para CPU
-- Otimizadas para RAM
+- Otimizadas para cpu
+- Otimizadas para ram
 - GPU
-- Otimizadas para Armazenamento
+- Otimizadas para armazenamento
 
 Entrando no serviço de EC2 no console da AWS, no submenu ao lado, existe a opção Tipos de Instância (Instance Types). Essa opção traz uma lista com todas as instâncias disponiveis na AWS
 
