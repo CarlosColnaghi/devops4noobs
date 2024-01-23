@@ -339,6 +339,40 @@ A AWS disponibiliza vários tipos de instâncias que possuem caraceristicas pró
 
 Entrando no serviço de EC2 no console da AWS, no submenu ao lado, existe a opção Tipos de Instância (Instance Types). Essa opção traz uma lista com todas as instâncias disponiveis na AWS
 
+### Modalidades de contrato
+
+O contrato das instâncias EC2 se resumem a 3 modalidades: on-demand, reserved e spot:
+
+- on-demand: É a modalidade padrão do contrato. Com esse contrato, o usuário paga somente pelo tempo de uso da instância, ou seja, enquanto a instância estiver desliga, não havera cobranças. Contudo, mesmo estando desligada, pode haver cobrança sobre o armazenamento, caso haja um disco associado a instância.
+O pagamento é por hora ou por segundo (considerando no mínimo 60 segundos), dependendo da AMI (imagem da instância). Sobre as instâncias com Linux, por exemplo, a cobrança é realizada sobre os segundos de uso. Entretanto, já para outras instâncias (como Linux) a cobrança é realizada sobre a hora. Em outras palavras, se usar somente 30 minutos, a cobrança sera o valor da hora. A definição de preço é baseada, principalmente, na capacidade computacional. O preço também é baseado nas amis públicas e privadas. Para essa modalidade, não existe contrato a longo prazo
+
+
+- reserved: Na modalidade reservada é possível economizar cerca de 72% em relação ao modelo on-demand. Com esse contrato, o usuário consegue reservar uma determinada categoria de uma instância. Nessa modalidade existem ainda 3 níveis: padrão, conversíveis e programadas. Na modalidade padrão, não é possível realizar alterações nas instâncias. Para essa modalidade o desconto é de 72%. Já a modalidade conversível permite realizar alterações nas instâncias, entretanto, o desconto é menor (54%). Por fim, as instâncias programadas são aquelas máquinas reservadas por um curto período de tempo. Com relação as formas de opção, existem 3 disponíveis: no upfront, partial e full upfront. No no upfront, não precisa pagar nada de imediato. No modelo partial upfront, é possível pagar uma parte e, por fim, o full upfront, é necessário pagar de imediato. O contrato reserved possui, no mínimo 1 ano e no máximo 3 anos. Durante a vigência do contrato não é possível cancelar, mas é possível vender as máquinas reservadas no marketplace da AWS. 
+
+- spot: É a modalidade com o maior desconto (90% de desconto). As instâncias spots podem ser destruídas a qualquer momento, sendo que a aws envia os avisos sobre o encerramento 2 minutos antes das interrupções. Em sua contração é necessário definir o valor máximo a se pagar pela instância e a instância vai ser liberada quando tiver uma máquina disponível por esse valor. Caso o valor mude, existem 2 soluções: pagar a diferença ou deixar de usar
+
+### Saving Plans
+
+Também é um modelo que compreende preços menores, principalmente quando comparado com o modelo on-demand. Nesse contrato, também é necessário escolher uma categoria de instâncias, contudo, o contratante pode apenas mudar para uma categoria superior a que ele escolheu no contrato
+
+Existem 3 categorias de saving plans: ec2, compute saving plans (compreende os serviços ec2, fargate e lambda) e sagemaker saving plans. Antes de começar a usar os saving plans, é necessário habilitar o serviço cost explorer para analisar os ambientes e começar a receber recomendações de economia. As primeiras recomendação podem começar a aparecer somente depois de 24 horas
+
+Os preços baixos dos saving plans são respostas ao compromisso do contrato. Os termos de contrato não pode ser mudadados, entretando, é possível se inscrever planos de poupança adicionais (o que torna possível aumentar o workload do plano). O compromisso é com base no preço por hora, ou seja, o workload no mês. Portanto, é definido no contrato a carga horária de uso das instâncias. Tanto o plano compute quanto o ec2 se aplicam sobre as instâncias compreendidas pelos cluters emr, eks e ecr. Os preços dos saving plans podem ser diferentes em relação as instâncias reservadas por um contrato, quando considerado determinados sitemas operacionais (como sles, por exemplo). Os saving plans não se aplicam as máquinas contratadas por ir (reserved instances)
+
+#### Saving plans ou on-demand?
+
+Saving plans:
+
+- suporta várias soluções computacionais: ec2, fargate, lambda
+- são mais flexiveis, pois, permitem trocas de famílias, sistemas operacionais, tamanhos, localizações e regiões
+- adaptação automática ao ambiente, porque existem recomendações a patir de cost explorer (que garantem uma automação sobre os processos de gerenciamento e monitoramento das instância)
+
+IR:
+
+- suporta varias soluções de banco de dados: rds, redshift e elasticsearch
+- é recomendado para criar ambientes onde os aplicativos precisam estar rodando 24x7, para aproveitar o máximo do contrato
+- necesita definir uma categoria específica de instância e um sistema operacional
+ 
 ### Criar instâncias EC2
 
 1. Launch Instance: Inicia o processo de criação das instâncias
