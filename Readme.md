@@ -375,15 +375,23 @@ IR:
  
 ### Criar instâncias EC2
 
-1. Launch Instance: Inicia o processo de criação das instâncias
+Primeiramente, para criar as instâncias, é necessário acessar o dashboard do serviço. Depois de acessar o dashboard, siga as seguintes instruções para criar a primeira instância:
 
-2. Choose an Amazon Machine Image (AMI): Determina a imagem do sistema operacional da instância
+1. Selecione a opção Instances do menu lateral 
 
-3. Choose an Instance Type: Determina o tipo de instância (principalmente com relação ao hardware)
+2. Clique em Launch Instance para Iniciar o processo de criação das instâncias
 
-4. Configure Security Group: Permite criar um novo grupo com os padrões para acessar a instância
+3. Na tela Choose an Amazon Machine Image (AMI), é necessário escolher a imagem do sistema operacional da instância (também chamado de AMI). Existem vários tipos de AMIs: AMIs criadas pelo próprio usuário, os do marketplace e os da comunidade
 
-5. Create a new key pair: Cria um par de chaves para acessar a instância via SSH
+4. Na tela Choose an Instance Type, o usuário precisa determinar o tipo de instância (principalmente com relação aos recursos de hardware)
+
+5. Na tela Configure Instance Details, a AWS disponibiliza a configuração da instância
+
+6. A próxima tela (Add Storage), o usuário consegue adicionar um volume e configurar o tamanho e o tipo do disco 
+
+7. Em Configure Security Group, o usuário consegue criar um novo grupo ou associar a instância a um grupo já criado anteriormente. O grupo de segurança determina as regras de acessar a instância
+
+8. Em Select an existing pair or create a new key pair, crie um novo par de chaves ou selecione um par de chaves já existente. Os pares de chaves  são usados para acessar a instância via SSH
 
 ### Configure Instance Details
 - Number of instances: determinquantidade de instâncias
