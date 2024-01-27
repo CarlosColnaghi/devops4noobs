@@ -373,7 +373,7 @@ IR:
 - é recomendado para criar ambientes onde os aplicativos precisam estar rodando 24x7, para aproveitar o máximo do contrato
 - necesita definir uma categoria específica de instância e um sistema operacional
  
-### Criar instâncias EC2
+### Criar instâncias EC2 (dashboard antiga)
 
 Primeiramente, para criar as instâncias, é necessário acessar o dashboard do serviço. Depois de acessar o dashboard, siga as seguintes instruções para criar a primeira instância:
 
@@ -392,6 +392,32 @@ Primeiramente, para criar as instâncias, é necessário acessar o dashboard do 
 7. Em Configure Security Group, o usuário consegue criar um novo grupo ou associar a instância a um grupo já criado anteriormente. O grupo de segurança determina as regras de acessar a instância
 
 8. Em Select an existing pair or create a new key pair, crie um novo par de chaves ou selecione um par de chaves já existente. Os pares de chaves  são usados para acessar a instância via SSH
+
+### Criar instâncias EC2 (dashboard nova)
+
+1. Selecione a opção Instances do menu lateral 
+
+2. Clique em Launch Instance para Iniciar o processo de criação das instância
+
+3. Defina o nome e/ou tags da instância
+
+4. Na seção Application and OS Images é possível escolher a imagem do sistema operacional. Em Browse more AMIs, o usuário consegue selecionar uma outra imagem que não esta presente na seção Quick Start. É recomendado usar as imagens desenvolvidades pela a AWS e/ou por seus parceiros (AWS Marketplace AMIs)
+
+5. Observe que no lado direito, existe um pop-up com um resumo das características da máquina
+
+6. Defina o tipo da instância
+
+7. Defina o par de chaves para acessar a máquina via ssh
+
+8. Na seção Network settings, é possível definir a configuração de rede. Em Advanced network configuration, o usuário consegue adicionar novos grupos de segurança e novas interfaces de rede e ips
+
+9. Defina o tipo de armazenamento e o seu tamanho. Também é possível definir dois File systems: o efs (é um nfs que permite o compartilhamento de arquivos entre sevidores linux) e fsx (file server da microsoft)
+
+Em EC2 Global View o usuário consegue ter uma visão global sobre todas as instâncias, vpc, secutiry group, subnet
+
+### Comportamento de desligamento (Shutdown Behavior), Proteção de finalização (Termination Protection) e Proteçao de parada (Stop Protection)
+
+Existem dois tipos de comportamento de desligamento: o stop e o terminate. Enquanto o objetivo do stop é parar a máquina, o terminate é finalizar (apagar). Então, quando o usuário tenta parar a máquina com o comportamento de desligamento stop pelo console da AWS, a instância desliga. Caso, o comportamento de desligamento seja o determinate, a também se desliga igual ao do stop, caso esse procedimento seja executado pela console. Se entrar na máquina via terminal e tentar desligar ela, por exemplo, ela vai se encerrar. A proteção de encerramento, impede que uma máquina seja finalizada acidentalmente. No, console, quando usuário tenta finalizar uma instância com esse recurso habilitado, a AWS dispara um pop-up que bloqueia a operação. Contudo, esse recurso é ignorado caso o usuário tente desligar a máquina com o comportamento de desligamento configurado para terminate. A proteção de parada, assim como a proteção de finalização, tem como objetivo evitar a parada acidental de uma instância.
 
 ### Configure Instance Details
 - Number of instances: determinquantidade de instâncias
