@@ -417,14 +417,14 @@ Em EC2 Global View o usuário consegue ter uma visão global sobre todas as inst
 
 ### Comportamento de desligamento (Shutdown Behavior), Proteção de finalização (Termination Protection) e Proteçao de parada (Stop Protection)
 
-Existem dois tipos de comportamento de desligamento: o stop e o terminate. Enquanto o objetivo do stop é parar a máquina, o terminate é finalizar (apagar). Então, quando o usuário tenta parar a máquina com o comportamento de desligamento stop pelo console da AWS, a instância desliga. Caso, o comportamento de desligamento seja o determinate, a também se desliga igual ao do stop, caso esse procedimento seja executado pela console. Se entrar na máquina via terminal e tentar desligar ela, por exemplo, ela vai se encerrar. A proteção de encerramento, impede que uma máquina seja finalizada acidentalmente. No, console, quando usuário tenta finalizar uma instância com esse recurso habilitado, a AWS dispara um pop-up que bloqueia a operação. Contudo, esse recurso é ignorado caso o usuário tente desligar a máquina com o comportamento de desligamento configurado para terminate. A proteção de parada, assim como a proteção de finalização, tem como objetivo evitar a parada acidental de uma instância.
+Existem dois tipos de comportamento de desligamento: o stop e o terminate. Enquanto o objetivo do stop é parar a máquina, o terminate é finalizar (apagar). Então, quando o usuário tenta parar a máquina com o comportamento de desligamento definido como stop pelo console da AWS, a instância desliga. Caso, o comportamento de desligamento seja o de terminate, a máquina também se desliga igual ao do stop, caso esse procedimento seja executado pela console. Contudo, se entrar na máquina via terminal e tentar desligar ela, por exemplo, ela consequentemente vai se encerrar. 
 
-### Configure Instance Details
-- Number of instances: determinquantidade de instâncias
+A proteção de encerramento, impede que uma máquina seja finalizada acidentalmente. No console, quando usuário tenta finalizar uma instância com esse recurso habilitado, a AWS dispara um pop-up que bloqueia a operação. Contudo, esse recurso é ignorado caso o usuário tente desligar a máquina com o comportamento de desligamento configurado para terminate. A proteção de parada, assim como a proteção de finalização, tem como objetivo evitar a parada acidental de uma instância
+
 - Shutdown behavior: comportamento executado no momento que a máquina é desligada
     - Terminate: impede que a máquina seja inicializada novamente depois de desligada (em outras palavras, a instância é terminada)
-    - Stop: permite que a máquia seja inicializada novamente depois de desligada
-- Termination protection: protege contra o desligamento "acidental" de uma máquina
+    - Stop: permite que a máquina seja inicializada novamente depois de desligada
+- Termination protection: protege contra o desligamento acidental de uma máquina
 
 ### Mudar a permissão de uma chave SSH 
 É importante que apenas o dono tenha a permissão de realizar a leitura da chave
@@ -437,30 +437,36 @@ Existem dois tipos de comportamento de desligamento: o stop e o terminate. Enqua
 
 ### Comandos
 
-Listar todas as instâncias 
+Listar todas as instâncias:
     
     $ aws ec2 describe-instances
 
-Remover uma instância
+Remover uma instância:
 
     $ aws ec2 terminate-instances --instance-ids "id-xyz"
 
-Exemplo de parâmetros para criar uma instância 
+Exemplo de parâmetros para criar uma instância:
 
-    $ aws ec2 run-instances --image-id "ami-0323c3dd2da7fb37d" --count 1 --instance-type "t2.micro" --key-name "MinhaChaveSSH" --security-group-ids "sg-0529062a5d07f7eab" --subnet-id "subnet-1deb2d3c
+    $ aws ec2 run-instances --image-id ami-0323c3dd2da7fb37d --count 1 --instance-type t2.micro --key-name chave_ssh --security-group-ids sg-0529062a5d07f7eab --subnet-id subnet-1deb2d3c
 
 ### AMI
-- Uma AMI é uma imagem de uma máquina e uma instância sempre está associada à uma AMI
-- Por padrão, uma AMI é privada e reservada para a sua região de origem
-- A AMI é armazenada pelo serviço de Bucket
-- É possível criar uma instância com base em AMI e depois de customizar essa instância, ainda é possivel criar uma nova AMI com base na instância customizada
+Uma AMI é uma imagem de uma máquina. Uma instância sempre está associada à uma AMI e portanto, todas as instâncias são criadas baseadas nas AMIs. A AMI compreede todas informações necessárias para iniciar uma instância
 
-- Tipos de AMI
+Os tipos de AMIs definem várias características de uma instância. Por causa dessas características, por exemplo, não é possível criar uma instância em um região diferente da AMI, ao mesmo tempo que também não é possível instalar um sistema operacional diferente do que a AMI define. É possível destacar alguns tipos de AMIs:
     - Região
     - Sistema Operacional
     - Arquitetura
     - Permissões de execução (pública, explícita e implícita)
     - Armazenamento
+
+Com relação as  permissões execução, existem 3 permissões:
+    - pública: são concedidas permissões de execução a todas as contas da AWs
+    - explicita: são concedidas permissões de execução a determinadas contas da AWS
+    - implicíta: são concedidas permissões de execução implícitas para uma AMI
+
+ Por padrão, uma AMI é privada e reservada para a sua região de origem, o que torna um recurso não global. A AMI é armazenada pelo serviço do bucket s3 e portanto, a cobrança sobre a AMI é realizada a partir do custo de armazenamendo s3
+ 
+ É possível criar uma instância com base em AMI e depois de customizar essa instância, o usuário consegue criar uma nova AMI com base na instância customizada. Uma AMI pode ser customizada em tempo de execução por meio do user-data
 
 ### Customizar em tempo de execução de uma AMI
 1. Instances
