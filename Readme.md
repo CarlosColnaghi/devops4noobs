@@ -459,7 +459,7 @@ Os tipos de AMIs definem várias características de uma instância. Por causa d
     - Permissões de execução (pública, explícita e implícita)
     - Armazenamento
 
-Com relação as  permissões execução, existem 3 permissões:
+Com relação as  permissões de execução, existem 3 permissões:
     - pública: são concedidas permissões de execução a todas as contas da AWs
     - explicita: são concedidas permissões de execução a determinadas contas da AWS
     - implicíta: são concedidas permissões de execução implícitas para uma AMI
@@ -468,47 +468,28 @@ Com relação as  permissões execução, existem 3 permissões:
  
  É possível criar uma instância com base em AMI e depois de customizar essa instância, o usuário consegue criar uma nova AMI com base na instância customizada. Uma AMI pode ser customizada em tempo de execução por meio do user-data
 
-### Customizar em tempo de execução de uma AMI
-1. Instances
+### Customização em tempo de execução de uma AMI
+Primeiramente, é preciso iniciar o processo de criação de uma instância. O cmapo User data da seção Advanced Detail permite inserir um script que será executado durante a criação da instância. Esse campo aceita texto ou o upload de um arquivo shell com o script a ser executado.
 
-2. Launch Intance
+Segue um exemplo de um script que pode ser executado em tempo de execução durante a criação da instância
 
-3. Configure Instance Details
-    - Advanced Details
-        - Em User Data é possível inserir um script que será exacutado durante o deploy da instância
-        - User data: Selecionar "As text"
-            
-                $ #!/bin/bash
+    $ #!/bin/bash
 
-                $ yum update -y
-                $ yum install httpd -y
-                $ systemctl start httpd
-                $ systemctl enable 
+    $ yum update -y
+    $ yum install httpd -y
+    $ systemctl start httpd
+    $ systemctl enable 
 
-### Liberar portas dos grupos de segurança
-1. Inbound rules
-2. Edit inbound rules
-3. Add rule
-5. Save rule
-
-### Indenficar se um serviço esta rodando no EC2
-
-    $ rpm -qa | grep httpd
-    $ systemctl status httpd
 
 ### Criar uma AMI
-1. Actions 
-2. Image
-3. Create Image
-    - Image name: nome_da_imagem
+
+Para criar uma AMI, primeiramente é necessário ter uma instância já criada. Depois, selecione a instância na qual se deseja criar a instância e por meio do menu de contexto Actions, selecione Image and templates e, por fim, a opção Create image. Na nova janela, preencha o nome, a descrição, o disco e as tags. Existe uma opção chamada No reboot. Quando desmarcada, a imagem será criada sem que a máquina reinicie. Gerando uma cópia da instância com essa opção desmarcada, torna o processo mais rápido e integro
 
 ### Criar uma instância a partir de uma AMI
-1. Selecionar a AMI
-2. Launch
 
-### Comandos
+Para criar uma instância a partir de uma AMI é recomendado entrar no dashboard das AMIs e em seguida selecionar a AMI e clicar em Launch instance from AMI
 
-#### Criar uma AMI
+#### Comando para criar uma AMI
 
     $ aws ec2 create-image --instance-id endereco_da_ami --name "nome_da_imagem"  --description "descricao_da_ami" --no-reboot
 
